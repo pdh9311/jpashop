@@ -8,10 +8,9 @@ import study.jpashop.domain.Member;
 import study.jpashop.domain.Order;
 import study.jpashop.domain.OrderItem;
 import study.jpashop.domain.item.Item;
-import study.jpashop.repository.ItemRepository;
-import study.jpashop.repository.MemberRepository;
-import study.jpashop.repository.OrderRepository;
-import study.jpashop.repository.OrderSearch;
+import study.jpashop.repository.*;
+import study.jpashop.repository.order.simplequery.OrderQueryRepository;
+import study.jpashop.repository.order.simplequery.OrderQueryDto;
 
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
 
     // 주문
@@ -62,4 +62,11 @@ public class OrderService {
         return orderRepository.findAll(orderSearch);
     }
 
+    public List<Order> findAllWithMemberDelivery() {
+        return orderRepository.findAllWithMemberDelivery();
+    }
+
+    public List<OrderQueryDto> findOrderDtos() {
+        return orderQueryRepository.findOrderDtos();
+    }
 }

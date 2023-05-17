@@ -13,6 +13,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
+//    @JsonIgnore
     @OneToOne(mappedBy = "delivery")
     private Order order;
 
