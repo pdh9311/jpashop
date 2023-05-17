@@ -92,12 +92,4 @@ public class OrderSimpleApiController {
         }
     }
 
-    @Data
-    @AllArgsConstructor
-    static class Result<T> {
-        private T data;
-    }
-
-
-
 }

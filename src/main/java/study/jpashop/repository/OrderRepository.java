@@ -73,11 +73,35 @@ public class OrderRepository {
 
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery(
-                        "select o from Order o" +
-                                " join fetch o.member m" +
-                                " join fetch o.delivery d", Order.class)
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
                 .getResultList();
     }
 
 
+    /**
+     * distinct : [DB쿼리 결과에 대한 중복 제거] + [애플리케이션에서 ID값이 같은 값을 중복 제거] 해줍니다.
+     * hibernate6 부터는 distinct를 사용하지 않더라도 기본적으로 distinct 가 동작합니다.
+     * 일대다 조인의 경우 페이징처리를 메모리에서 하게 됩니다. (위험)
+     */
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
 }
