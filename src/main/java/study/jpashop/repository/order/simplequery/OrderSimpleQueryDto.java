@@ -8,17 +8,17 @@ import study.jpashop.domain.OrderStatus;
 import java.time.LocalDateTime;
 
 @Data
-public class OrderQueryDto {
+public class OrderSimpleQueryDto {
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
     private OrderStatus orderStatus;
     private Address address;
 
-    public OrderQueryDto() {
+    public OrderSimpleQueryDto() {
     }
 
-    public OrderQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Address address) {
+    public OrderSimpleQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Address address) {
         this.orderId = orderId;
         this.name = name;
         this.orderDate = orderDate;
@@ -26,7 +26,7 @@ public class OrderQueryDto {
         this.address = address;
     }
 
-    public OrderQueryDto(Order order) {
+    public OrderSimpleQueryDto(Order order) {
         this.orderId = order.getId();
         this.name = order.getMember().getName();    // LAZY 초기화
         this.orderDate = order.getOrderDate();

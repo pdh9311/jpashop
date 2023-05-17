@@ -51,6 +51,12 @@ public class OrderRepository {
                 .fetch();
     }
 
+    public List<Order> findOrders() {
+        return em.createQuery("select o from Order o join o.member", Order.class)
+                .getResultList();
+    }
+
+
     private BooleanExpression statusEq(OrderStatus orderStatus) {
         if (orderStatus == null) {
             return null;
